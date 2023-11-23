@@ -9,5 +9,5 @@ router.put('/users/:id',updateUsers);
 //delete logic
 router.delete('/users/:id',deleteUsers);
 router.get('/users/delected',getUserDeleted);
-router.put('users/:id/restore',restoreUser)
+router.patch('/users/:id/restore',restoreUser);
 export default router;

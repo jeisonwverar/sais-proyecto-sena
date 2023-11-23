@@ -24,12 +24,12 @@ try {
 };
 export const createProduct=async(req,res)=>{
  try {
-    const {name,description,maker,Subsystem,initialAmount,outputAmount,entryAmount}=req.body;
+    const {name,description,maker,subsystem,initialAmount,outputAmount,entryAmount}=req.body;
     const newProduct=await Product.create({
         name,
         description,
         maker,
-        Subsystem,
+        subsystem,
         initialAmount,
         outputAmount,
         entryAmount
@@ -44,7 +44,7 @@ export const createProduct=async(req,res)=>{
 };
 export const updateProduct=async(req,res)=>{
     const id=req.params.id;
-    const {name,description,maker,Subsystem,initialAmount}=req.body;
+    const {name,description,maker,subsystem,initialAmount}=req.body;
 
     try {
        const updateProduct=await Product.findByPk(id);
@@ -52,7 +52,7 @@ export const updateProduct=async(req,res)=>{
             updateProduct.name=name;
             updateProduct.description=description;
             updateProduct.maker=maker;
-            updateProduct.Subsystem=Subsystem;
+            updateProduct.subsystem=subsystem;
             updateProduct.initialAmount=initialAmount;
 
         }
@@ -68,11 +68,11 @@ export const deleteProduct=async(req,res)=>{
         const id=req.params.id;
         const {name}=req.body;
         const ProductId=Product.findByPk(id);
-            if(ProductId){
-            
-                await Product.destroy({force:false})
-
+            if(!ProductId){
+              return res.status(404).json({ message: 'User not found' });
+              
             }
+            await Product.destroy({force:false})
             res.json({message:`product:${name} successfully removed ID: ${id}`}).status(204);
     } catch (error) {
         res.status(500).json({ message: error.message });

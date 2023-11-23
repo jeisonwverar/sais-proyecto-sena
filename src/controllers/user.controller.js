@@ -1,8 +1,8 @@
 import {User} from '../models/user.models.js';
-
+import { Op } from 'sequelize';
 export const getUsers=async(req,res)=>{
  try {
-    const users=await User.findAll();
+    const users=await User.findAll({paranoid:true});
     await res.json(users);
  } catch (error) {
     return res.status(500).json({message:error.message})
@@ -67,28 +67,32 @@ export const deleteUsers=async(req,res)=>{
     
     try {
     const user=await User.findByPk(id);
-    if(user){
-        await user.destroy({force:false})
-
+    if(!user){
+        
+     return res.status(404).json({ message: 'User not found' });
     }
-    res.json({message:`product:${name} successfully removed ID: ${id}`}).status(204);
+    await user.destroy({force:false})
+    res.json({message:`user:${name} successfully removed ID: ${id}`}).status(204);
         
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(404).json({ message: error.message });
     }
 };
 
 //valor borrado logico poderlo traer y restaurar 
 
-export const getUserDeleted=async(req,res)=>{
+export const getUserDeleted=async(_,res)=>{
+    console.log('Get User Deleted Route Hit');
     try {
-        const deletedUser = await User.findAll({
-            where: { deletedAt: { [Op.ne]: null } }, // Productos con deletedAt no nulo
-            paranoid: false, // Incluir registros eliminados lógicamente
+        const deletedUsers = await User.findAll({
+            where: { deletedAt: { [Op.ne]: null } }, // Usuarios con deletedAt no nulo
+            paranoid: true, // Incluir registros eliminados lógicamente
           });
+         console.log(deletedUsers)
+          res.json(deletedUsers);
       
-          res.json(deletedUser);
+         
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -97,13 +101,13 @@ export const getUserDeleted=async(req,res)=>{
 //restore
 
 export const restoreUser=async(req,res)=>{
+    const id = req.params.id;
     try {
-        const id = req.params.id;
-    
+        console.log('Restore User Route Hit');
         // Buscar el producto por su ID (incluyendo eliminados lógicamente)
         const user = await User.findOne({
           where: { id },
-          paranoid: false,
+          paranoid: true,
         });
     
         if (!user) {
