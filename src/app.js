@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 //routes import
 import userRoutes from  "./routes/user.routes.js";
 import productRoutes from "./routes/product.routes.js";
+import inventoryRoutes from './routes/inventory.routes.js';
 const app=express();
 
 //middleware
@@ -21,6 +22,7 @@ app.use(cookieParser());
 
 app.use('/api/v1',userRoutes);
 app.use('/api/v1',productRoutes);
+app.use('/api/v1',inventoryRoutes);
 
 
 

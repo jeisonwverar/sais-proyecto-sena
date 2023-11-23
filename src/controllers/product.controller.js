@@ -1,8 +1,12 @@
-import { Product } from "../models/product.models";
-import { Subsystem } from "../../utils/enumProduct";
+import { Product } from "../models/product.models.js";
+
 export const getProducts=async(req,res)=>{
  try {
-    const  products=await Product.findAll();
+    const  products=await Product.findAll({
+      attributes:[
+        'id','name','description','maker','subsystem'
+      ]
+    });
    await res.json(products);
  } catch (error) {
     res.json({message:error.message});
@@ -20,13 +24,15 @@ try {
 };
 export const createProduct=async(req,res)=>{
  try {
-    const {name,description,maker,Subsystem,initialAmount}=req.body;
+    const {name,description,maker,Subsystem,initialAmount,outputAmount,entryAmount}=req.body;
     const newProduct=await Product.create({
         name,
         description,
         maker,
         Subsystem,
-        initialAmount
+        initialAmount,
+        outputAmount,
+        entryAmount
     });
 
     

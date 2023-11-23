@@ -1,6 +1,6 @@
-import { sequelize } from "../database/database";
+import { sequelize } from "../database/database.js";
 import { DataTypes } from "sequelize";
-import { Subsystem } from "../../utils/enumProduct";
+import { Subsystem } from "../../utils/enum.js";
 export const Product=sequelize.define('products',{
     id:{
         type:DataTypes.BIGINT,
@@ -26,7 +26,17 @@ export const Product=sequelize.define('products',{
         defaultValue:Subsystem[Subsystem.length-1]
        },
        initialAmount:{
-        type:DataTypes.INTEGER,
+        type:DataTypes.FLOAT,
+        allowNull:false,
+        defaultValue:0
+       },
+       outputAmount:{
+        type:DataTypes.FLOAT,
+        allowNull:false,
+        defaultValue:0
+       },
+       entryAmount:{
+        type:DataTypes.FLOAT,
         allowNull:false,
         defaultValue:0
        }
