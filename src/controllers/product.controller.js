@@ -1,6 +1,6 @@
 import { Product } from "../models/product.models.js";
-
-export const getProducts=async(req,res)=>{
+import { Op } from "sequelize";
+export const getProducts=async(_,res)=>{
  try {
     const  products=await Product.findAll({
       attributes:[
@@ -64,16 +64,16 @@ export const updateProduct=async(req,res)=>{
 };
 
 export const deleteProduct=async(req,res)=>{
+      const id=req.params.id;
     try {
-        const id=req.params.id;
-        const {name}=req.body;
-        const ProductId=Product.findByPk(id);
-            if(!ProductId){
+        const productId= await Product.findByPk(id);
+            if(!productId){
               return res.status(404).json({ message: 'User not found' });
               
             }
-            await Product.destroy({force:false})
-            res.json({message:`product:${name} successfully removed ID: ${id}`}).status(204);
+            await productId.destroy({force:false});
+
+            res.json({message:`successfully removed ID: ${id}`}).status(204);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -81,20 +81,19 @@ export const deleteProduct=async(req,res)=>{
 };
 
 //deleted logic
-export const getDeletedProducts = async (req, res) => {
+export const getDeletedProducts = async (_, res) => {
     try {
-      const deletedProducts = await Product.findAll({
-        where: { deletedAt: { [Op.ne]: null } }, // Productos con deletedAt no nulo
-        paranoid: false, // Incluir registros eliminados lógicamente
+      const  products=await Product.findAll({
+        where: { deletedAt: { [Op.ne]: null } }, 
+        paranoid: false
       });
-  
-      res.json(deletedProducts);
+     await res.json(products);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
   };
 
-  //
+
 
   export const restoreProduct=async(req,res)=>{
     try {
@@ -103,7 +102,7 @@ export const getDeletedProducts = async (req, res) => {
         // Buscar el producto por su ID (incluyendo eliminados lógicamente)
         const product = await Product.findOne({
           where: { id },
-          paranoid: false,
+          paranoid: false
         });
     
         if (!product) {

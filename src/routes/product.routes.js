@@ -7,6 +7,7 @@ router.get('/products/:id',getIdProduct)
 router.post('/products',createProduct);
 router.put('/products/:id',updateProduct);
 router.delete('/products/:id',deleteProduct);
-router.delete('/products/deleted',getDeletedProducts)
-router.put('/products/:id/restore',restoreProduct);
+router.get('/deleted/products',getDeletedProducts);
+router.patch('/deleted/:id',restoreProduct);
+
 export default router;

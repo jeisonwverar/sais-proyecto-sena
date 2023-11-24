@@ -30,7 +30,7 @@ export const Inventory=sequelize.define('inventory',{
         defaultValue: 'N/A',
       },
       date:{
-        type:DataTypes.DATE,
+        type:DataTypes.DATEONLY,
         allowNull: false,
         defaultValue:new DataTypes.NOW
       }

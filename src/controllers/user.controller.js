@@ -63,7 +63,7 @@ export const updateUsers=async(req,res)=>{
 };
 export const deleteUsers=async(req,res)=>{
     const id =req.params.id;
-    const {name}=req.body;
+    
     
     try {
     const user=await User.findByPk(id);
@@ -72,7 +72,7 @@ export const deleteUsers=async(req,res)=>{
      return res.status(404).json({ message: 'User not found' });
     }
     await user.destroy({force:false})
-    res.json({message:`user:${name} successfully removed ID: ${id}`}).status(204);
+    res.json({message:`successfully removed ID: ${id}`}).status(204);
         
 
     } catch (error) {
@@ -87,7 +87,7 @@ export const getUserDeleted=async(_,res)=>{
     try {
         const deletedUsers = await User.findAll({
             where: { deletedAt: { [Op.ne]: null } }, // Usuarios con deletedAt no nulo
-            paranoid: true, // Incluir registros eliminados lógicamente
+            paranoid: false, // Incluir registros eliminados lógicamente
           });
          console.log(deletedUsers)
           res.json(deletedUsers);
@@ -104,17 +104,17 @@ export const restoreUser=async(req,res)=>{
     const id = req.params.id;
     try {
         console.log('Restore User Route Hit');
-        // Buscar el producto por su ID (incluyendo eliminados lógicamente)
-        const user = await User.findOne({
-          where: { id },
-          paranoid: true,
-        });
+       
+        const user = await User.findOne(({
+            where: { id },
+            paranoid: false
+          }));
     
         if (!user) {
           return res.status(404).json({ message: `User with ID ${id} not found` });
         }
     
-        // Restaurar el producto (eliminar la marca de eliminado lógico)
+   
         await user.restore();
     
         res.json({ message: `User ${user.name} successfully restored (ID: ${id})` });

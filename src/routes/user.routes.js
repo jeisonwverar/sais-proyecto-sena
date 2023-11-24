@@ -8,6 +8,6 @@ router.post('/users',createUsers);
 router.put('/users/:id',updateUsers);
 //delete logic
 router.delete('/users/:id',deleteUsers);
-router.get('/users/delected',getUserDeleted);
-router.patch('/users/:id/restore',restoreUser);
+router.get('/detroy/users',getUserDeleted);
+router.patch('/detroy/users/:id',restoreUser);
 export default router;

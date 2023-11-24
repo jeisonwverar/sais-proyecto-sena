@@ -1,6 +1,7 @@
 import { Product } from "../models/product.models.js";
 import { Inventory } from "../models/inventory.models.js";
 
+
 export const  getInventory=async(_,res)=>{
 
     try {
@@ -21,8 +22,13 @@ export const getOutputInventory=async(_,res)=>{
         const inventory=await Inventory.findAll({
             where:{
                 movementType:'salida',
-                include
-            }
+            },
+            include:[
+                {
+                    model:Product,
+                    attributes: ['name','subsystem']
+                }
+            ]
         });
         res.json(inventory);
     } catch (error) {
@@ -34,7 +40,13 @@ export const getEntryInventory=async(_,res)=>{
         const inventory=await Inventory.findAll({
             where:{
                 movementType:'entrada'
-            }
+            },
+            include:[
+                {
+                    model:Product,
+                    attributes: ['name','subsystem']
+                }
+            ]
         });
         res.json(inventory);
     } catch (error) {
@@ -45,8 +57,14 @@ export const getRefundInventory=async(_,res)=>{
     try {
         const inventory=await Inventory.findAll({
             where:{
-                movementType:'reintegro'
-            }
+                movementType:'reintegro',
+            },
+            include:[
+                {
+                    model:Product,
+                    attributes: ['name','subsystem']
+                }
+            ]
         });
         res.json(inventory);
     } catch (error) {
@@ -91,3 +109,68 @@ try {
 
 
 };
+
+//one route getId
+export const  getInventoryId=async(req,res)=>{
+ const {id}=req.params;
+ try {
+    const idInventory=await Inventory.findByPk(id);
+    if(!idInventory){
+
+       return res.status(404).json({message:`ID: ${id} Not Found`})
+    }
+    res.json(idInventory);
+
+
+
+ } catch (error) {
+     res.json({message:error.message});
+ }
+
+}
+//update 
+
+export const updateInventory=async(req,res)=>{
+    const  {id}=req.params;
+    const {consecutive,amount,movementType,observation,serialNumber,date}=req.body;
+    try {
+        const updateInventory= await Inventory.findByPk(id);
+        if(updateInventory){
+            updateInventory.consecutive=consecutive,
+            updateInventory.amount=amount,
+            updateInventory.movementType=movementType,
+            updateInventory.observation=observation,
+            updateInventory.serialNumber=serialNumber,
+            updateInventory.date=date
+        }
+
+        await updateInventory.save();
+        res.json(updateInventory)
+
+
+
+
+
+
+    } catch (error) {
+        res.json({message:error.message});
+    }
+
+
+
+};
+
+export const deleteInventory=async(req,res)=>{
+ const {id}=req.params;
+    try {
+        const deleteId= await Inventory.findByPk(id);
+        if(!deleteId){
+            return res.status(404).json({message:`ID: ${id} Not Found`})
+        }
+        deleteId.destroy();
+        res.json(`deleted ID: ${id}`)
+        
+    } catch (error) {
+        res.json({message:error.message});
+    }
+}
