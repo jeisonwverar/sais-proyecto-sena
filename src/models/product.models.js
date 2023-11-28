@@ -1,6 +1,6 @@
 import { sequelize } from "../database/database.js";
 import { DataTypes } from "sequelize";
-import { Subsystem } from "../../utils/enum.js";
+import { Subsystem } from "../utils/enum.js";
 export const Product=sequelize.define('products',{
     id:{
         type:DataTypes.BIGINT,

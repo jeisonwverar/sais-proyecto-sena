@@ -19,7 +19,7 @@ try {
 
 }
 };
-
+/*
 export const createUsers=async(req,res)=>{
     const{name,lastname,email,password,roll}=req.body;
     try {
@@ -35,7 +35,7 @@ export const createUsers=async(req,res)=>{
         res.json({message:error.message})
     }
 };
-
+*/
 export const updateUsers=async(req,res)=>{
     const userId=req.params.id;
     const{name,lastname,email,password,roll}=req.body;
