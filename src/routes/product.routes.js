@@ -7,6 +7,7 @@ router.get('/products/:id',getIdProduct)
 router.post('/products',createProduct);
 router.put('/products/:id',updateProduct);
 router.delete('/products/:id',deleteProduct);
+//delete logic
 router.get('/deleted/products',getDeletedProducts);
 router.patch('/deleted/:id',restoreProduct);
 

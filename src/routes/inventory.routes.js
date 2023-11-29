@@ -9,7 +9,7 @@ router.get('/inventory/output',getOutputInventory);
 router.get('/inventory/entry',getEntryInventory);
 //inventory refund
 router.get('/inventory/refund',getRefundInventory);
-//form para crear un nuevo registro
+//form register
 router.post('/inventory',createRecord);
 export default router;
 router.get('/inventory/:id',getInventoryId);

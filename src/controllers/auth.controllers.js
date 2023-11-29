@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { User } from '../models/user.models.js';
 import  { createAccessToken } from '../utils/jwt.js';
 export const register=async(req,res)=>{
-    const{name,lastname,email,password,roll}=req.body;
+    const{name,lastname,email,password}=req.body;
     try {
         const passwordHash=await bcrypt.hash(password,10);
         const newUser=await User.create({
@@ -10,10 +10,9 @@ export const register=async(req,res)=>{
             lastname,
             email,
             password:passwordHash,
-            roll
         });
         const userSaved= newUser.save();
-        const token=await createAccessToken({id:userSaved.id,email:userSaved.email});
+        const token=await createAccessToken({id:userSaved.id,email:userSaved.email,roll:userSaved.roll});
         res.cookie('token',token);
         res.json({message:"User create successfully"});
     } catch (error) {
@@ -32,7 +31,7 @@ export const login=async(req,res)=>{
         
         if(!isMatch) return res.status(404).json({message:'Incorrect password'});
 
-        const token= await createAccessToken({id:userFound.id,email:userFound.email});
+        const token= await createAccessToken({id:userFound.id,email:userFound.email,roll:userFound.roll});
         res.cookie('token',token);
 
         res.json({id:userFound.id,
@@ -43,6 +42,8 @@ export const login=async(req,res)=>{
             createAt:userFound.createdAt,
             updateAt:userFound.updatedAt
         })
+
+        //console.log(req.cookies)
     } catch (error) {
         res.status(500).json({message:error.message});
     }

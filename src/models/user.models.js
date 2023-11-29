@@ -27,6 +27,7 @@ export const User=sequelize.define('user',{
    roll:{
       type:DataTypes.STRING,
       allowNull: false,
+      defaultValue:'cliente'
    } 
 },
 {paranoid:true});
