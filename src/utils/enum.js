@@ -5,3 +5,9 @@
     'EPP',
     'OTHER'
 ];
+
+export const  MovementType=[
+ 'salida',
+ 'entrada',
+ 'reintegro'
+]

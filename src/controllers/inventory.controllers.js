@@ -74,6 +74,7 @@ export const getRefundInventory=async(_,res)=>{
 
 export const createRecord=async(req,res)=>{
 const{consecutive,amount,movementType,serialNumber,observation,date,productId}=req.body;
+
 const getProductId= await Product.findByPk(productId);
 try {
     if(!getProductId){
@@ -133,6 +134,8 @@ export const  getInventoryId=async(req,res)=>{
 export const updateInventory=async(req,res)=>{
     const  {id}=req.params;
     const {consecutive,amount,movementType,observation,serialNumber,date}=req.body;
+   
+   
     try {
         const updateInventory= await Inventory.findByPk(id);
         if(updateInventory){

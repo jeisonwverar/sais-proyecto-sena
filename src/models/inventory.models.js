@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/database.js";
 import { Product } from "./product.models.js";
-
+import {MovementType } from '../utils/enum.js';
 export const Inventory=sequelize.define('inventory',{
     id:{
       type:DataTypes.BIGINT,
@@ -18,7 +18,7 @@ export const Inventory=sequelize.define('inventory',{
         allowNull: false,
       },
       movementType: {
-        type: DataTypes.ENUM('entrada','salida','reintegro'),
+        type: DataTypes.ENUM(...MovementType),
         allowNull: false,
       },
       serialNumber: {
