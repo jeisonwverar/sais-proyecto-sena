@@ -24,10 +24,10 @@ export const User=sequelize.define('user',{
       type:DataTypes.STRING,
       allowNull: false,
    },
-   roll:{
+   role:{
       type:DataTypes.STRING,
       allowNull: false,
-      defaultValue:'cliente'
+      defaultValue:'client'
    } 
 },
 {paranoid:true});

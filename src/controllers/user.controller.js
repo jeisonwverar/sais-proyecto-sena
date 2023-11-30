@@ -1,5 +1,6 @@
 import {User} from '../models/user.models.js';
 import { Op } from 'sequelize';
+import bcrypt from 'bcrypt';
 export const getUsers=async(req,res)=>{
  try {
     const users=await User.findAll({paranoid:true});
@@ -38,17 +39,17 @@ export const createUsers=async(req,res)=>{
 */
 export const updateUsers=async(req,res)=>{
     const userId=req.params.id;
-    const{name,lastname,email,password,roll}=req.body;
+    const{name,lastname,email,password,role}=req.body;
     try {
-        
+        const passwordHash=await bcrypt.hash(password,10);
        const updateUser=await User.findByPk(userId);
 
        if(updateUser){
         updateUser.name=name;
         updateUser.lastname=lastname;
         updateUser.email=email;
-        updateUser.password=password;
-        updateUser.roll=roll;
+        updateUser.password=passwordHash;
+        updateUser.role=role;
 
        }
         

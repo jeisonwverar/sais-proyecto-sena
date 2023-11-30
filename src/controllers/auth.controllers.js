@@ -12,7 +12,7 @@ export const register=async(req,res)=>{
             password:passwordHash,
         });
         const userSaved= newUser.save();
-        const token=await createAccessToken({id:userSaved.id,email:userSaved.email,roll:userSaved.roll});
+        const token=await createAccessToken({id:userSaved.id,email:userSaved.email,role:userSaved.role});
         res.cookie('token',token);
         res.json({message:"User create successfully"});
     } catch (error) {
@@ -31,13 +31,13 @@ export const login=async(req,res)=>{
         
         if(!isMatch) return res.status(404).json({message:'Incorrect password'});
 
-        const token= await createAccessToken({id:userFound.id,email:userFound.email,roll:userFound.roll});
+        const token= await createAccessToken({id:userFound.id,email:userFound.email,role:userFound.role});
         res.cookie('token',token);
 
         res.json({id:userFound.id,
             name:userFound.name,
             lastname:userFound.lastname,
-            roll:userFound.roll,
+            role:userFound.role,
             email:userFound.email,
             createAt:userFound.createdAt,
             updateAt:userFound.updatedAt
