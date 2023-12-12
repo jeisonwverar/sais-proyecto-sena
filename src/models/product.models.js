@@ -39,6 +39,11 @@ export const Product=sequelize.define('products',{
         type:DataTypes.FLOAT,
         allowNull:false,
         defaultValue:0
+       },
+       endAmount:{
+        type:DataTypes.FLOAT,
+        allowNull:false,
+        defaultValue:0
        }
 
 },
