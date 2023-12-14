@@ -11,7 +11,7 @@ Creado para la necesidad de tener un manejo más adecuado.
 
     </div>
     <div className="p-6">
-        <img src="../../public/img/initial-home.jpg" alt="home page"  />
+        <img src="/img/initial-home.jpg" alt="home page"  />
     </div>
     </div>
   )
