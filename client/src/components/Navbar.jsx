@@ -34,6 +34,13 @@ const Navbar = () => {
                         <li>
                           <Link to='/refound'>reintegros</Link>
                         </li>
+                        {
+                            (user.role === 'admin' || user.role === 'storer') && (
+                                <li>
+                                  <Link to='/products'>producto</Link>
+                                </li>
+                              )
+                        }
                       </li>
                       <li className="">
                         <Link to='/' onClick={() => logout()}>

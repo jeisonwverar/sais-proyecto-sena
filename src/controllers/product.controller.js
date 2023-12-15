@@ -7,6 +7,7 @@ export const getProducts=async(_,res)=>{
         'id','name','description','maker','subsystem'
       ]
     });
+    
    await res.json(products);
  } catch (error) {
     res.json({message:error.message});

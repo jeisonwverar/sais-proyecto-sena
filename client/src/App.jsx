@@ -11,11 +11,15 @@ import ProtectedRoute from './ProtectedRoute'
 import Dashboard from './pages/dashboard'
 import InventoryEntryPage from './pages/InventoryEntryPage'
 import InventoryRefoundPage from './pages/InventoryRefoundPage'
+import Products from './pages/Products'
+import UserPage from './pages/userPage'
+import { ProductsProvider } from './context/ProductsContext'
 function App() {
  
 
   return (
     <AuthProvider>
+      <ProductsProvider>
       <BrowserRouter>
     <main className='container mx-auto px-10'>
     <Navbar/>
@@ -33,11 +37,17 @@ function App() {
   </Route>
   <Route element={<ProtectedRoute requiredRoles={['admin', 'storer']} />}>
       <Route path='/dashboard' element={<Dashboard />} />
+      <Route path='/products' element={<Products/>}/>
+      <Route path='/user' element={<UserPage/>} />
+  </Route>
+  <Route element={<ProtectedRoute requiredRoles={['admin', 'storer']} />}>
+      
   </Route>
 </Routes>
 
     </main>
       </BrowserRouter>
+      </ProductsProvider>
     </AuthProvider>
   )
 }

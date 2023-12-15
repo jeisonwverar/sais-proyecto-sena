@@ -1,6 +1,9 @@
 
 
+
 const InventoryHome = () => {
+  
+
   return (
     <div>InvetoryHome</div>
   )
