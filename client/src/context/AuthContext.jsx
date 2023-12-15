@@ -15,7 +15,7 @@ export const useAuth= () => {
 
 
 export const AuthProvider=({children})=>{
-         const [user,setUser]=useState();
+         const [user,setUser]=useState(null);
          const [isAuthenticated,setIsAuthenticated]=useState(false);
          const [errors,setErrors]=useState([]);
          const [loading,setLoading]=useState(true);
@@ -26,8 +26,8 @@ export const AuthProvider=({children})=>{
             try {
                 const res= await registerRequest(user);
 
-                console.log(res)
-                setUser(user);
+                //console.log(res)
+                setUser(res);
                 setIsAuthenticated(true);
             } catch (error) {
                 console.log(error)
@@ -71,10 +71,12 @@ export const AuthProvider=({children})=>{
         if(!cookies.token){
             setIsAuthenticated(false);
             setLoading(false)
-            return setUser(null)
+           setUser(null);
+           return;
         }
         try {
             const res= await  verifyTokenRequest(cookies.token);
+            console.log(res)
             if(!res.data){ 
                 setIsAuthenticated(false)
             
