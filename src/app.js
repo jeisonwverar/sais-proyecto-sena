@@ -30,11 +30,4 @@ app.use('/api/v1',authRoutes);
 
 
 
-
-
-
-
-
-
-
 export default app;
