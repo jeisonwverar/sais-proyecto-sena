@@ -12,5 +12,6 @@ module.exports = withMT({
   },
   plugins: [],
 });
-git commit -m "Resolver conflictos"
+
+
 
