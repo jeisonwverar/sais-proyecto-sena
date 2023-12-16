@@ -7,6 +7,7 @@ export const getProducts=async(_,res)=>{
         'id','name','description','maker','subsystem'
       ]
     });
+    
    await res.json(products);
  } catch (error) {
     res.json({message:error.message});
@@ -25,6 +26,7 @@ try {
 export const createProduct=async(req,res)=>{
  try {
     const {name,description,maker,subsystem,initialAmount,outputAmount,entryAmount}=req.body;
+    const valueAmount=initialAmount;
     const newProduct=await Product.create({
         name,
         description,
@@ -32,7 +34,8 @@ export const createProduct=async(req,res)=>{
         subsystem,
         initialAmount,
         outputAmount,
-        entryAmount
+        entryAmount,
+        endAmount:valueAmount
     });
 
     

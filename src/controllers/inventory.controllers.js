@@ -96,11 +96,18 @@ try {
 
     if(movementType === 'entrada'){
         getProductId.entryAmount+=amount;
-    }else if(movementType === 'salida'){
+        getProductId.endAmount+=amount;
+    }else if(movementType === 'salida'&& getProductId.endAmount <=amount){
         getProductId.outputAmount+=amount;
-    }else if(movementType === 'reintegro'){
+        getProductId.endAmount-=amount;
+    }else if(movementType === 'reintegro'&& getProductId.endAmount <=amount){
         getProductId.outputAmount+=amount;
+        getProductId.endAmount-=amount;
     }
+    if (getProductId.endAmount <= 0) {
+        throw new Error('End amount cannot be zero or negative');
+      }
+  
     res.json(newRecord);
     await getProductId.save();
 
