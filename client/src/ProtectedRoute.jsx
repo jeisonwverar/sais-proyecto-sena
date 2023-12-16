@@ -5,8 +5,8 @@ import { useAuth } from "./context/AuthContext"
 function ProtectedRoute({ requiredRoles }) {
   const { loading, isAuthenticated, user } = useAuth();
   console.log('Loading:', loading);
-  //console.log('Is Authenticated:', isAuthenticated);
-  //console.log('User:', user);
+  console.log('Is Authenticated:', isAuthenticated);
+  console.log('User:', user);
 
   if (loading) {
    

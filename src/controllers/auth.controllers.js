@@ -4,11 +4,12 @@ import  { createAccessToken } from '../utils/jwt.js';
 import jwt from 'jsonwebtoken';
 import { TOKEN_SECRET } from '../config.js';
 
+
 export const register=async(req,res)=>{
     const{name,lastname,email,password}=req.body;
     try {
-        const userFound=await User.findOne({email});
-        if(userFound)res.status(400).json(['the email already'])
+        const userFound=await User.findOne({where:{email}});
+        if(userFound) return res.status(400).json(['the email already']);
 
 
 
@@ -21,10 +22,10 @@ export const register=async(req,res)=>{
         });
         const userSaved= newUser.save();
         const token=await createAccessToken({id:userSaved.id,email:userSaved.email,role:userSaved.role});
-        res.cookie('token',token);
-        res.json({message:"User create successfully"});
+        return res.cookie('token',token).json({message:"User create successfully"});
     } catch (error) {
-        res.json({message:error.message})
+        console.error(error);
+    return res.status(500).json({ error: 'Internal server error' });
     }
 };
 export const login=async(req,res)=>{

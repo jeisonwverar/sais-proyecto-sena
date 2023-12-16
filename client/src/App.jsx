@@ -14,15 +14,17 @@ import InventoryRefoundPage from './pages/InventoryRefoundPage'
 import Products from './pages/Products'
 import UserPage from './pages/userPage'
 import { ProductsProvider } from './context/ProductsContext'
+
 function App() {
  
 
   return (
+    <div className='flex flex-col min-h-screen'>
     <AuthProvider>
       <ProductsProvider>
       <BrowserRouter>
-    <main className='container mx-auto px-10'>
-    <Navbar/>
+    <main className='flex-grow'>
+     <Navbar/> 
     <Routes>
   <Route path='/' element={<HomePage />} />
   <Route path='/login' element={<LoginPage />} />
@@ -46,9 +48,12 @@ function App() {
 </Routes>
 
     </main>
+  
       </BrowserRouter>
       </ProductsProvider>
     </AuthProvider>
+
+    </div>
   )
 }
 

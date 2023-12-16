@@ -10,12 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
+    "@heroicons/react": "^2.0.18",
     "@material-tailwind/react": "^2.1.7",
-=======
     "axios": "^1.6.2",
     "js-cookie": "^3.0.5",
->>>>>>> 01728d972318967448f4896c3c2e4f08c365454c
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.48.2",

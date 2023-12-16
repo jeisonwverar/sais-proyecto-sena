@@ -26,11 +26,11 @@ export const AuthProvider=({children})=>{
             try {
                 const res= await registerRequest(user);
 
-                //console.log(res)
+                console.log(res)
                 setUser(res);
                 setIsAuthenticated(true);
             } catch (error) {
-                console.log(error)
+                console.log(error.response)
                 setErrors(error.response.data)
             }
         }
@@ -38,7 +38,7 @@ export const AuthProvider=({children})=>{
             try {
                 const res=  await loginRequest(user); 
                 
-                //console.log(res)
+                console.log(res)
                 setIsAuthenticated(true);
                 setUser(res.data)
             } catch (error) {
@@ -56,7 +56,7 @@ export const AuthProvider=({children})=>{
         let timer=null;
         if(errors.length>0){
          timer = setTimeout(() => {
-            setTimeout
+            
                 setErrors([])
             },5000)
         }

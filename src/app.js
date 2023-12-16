@@ -13,13 +13,14 @@ const app=express();
 //middleware
 app.use(cors({
     origin:'http://localhost:5173',
-    credentials:true,
+    credentials: true,
+    
 }));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 app.use(morgan("dev"));
-app.use(helmet());
+//app.use(helmet());
 
 
 //routes

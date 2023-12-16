@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 const LoginPage = () => {
  const{register,handleSubmit,formState:{errors}}=useForm();
   const{signin,errors:signinErrors,isAuthenticated}=useAuth();
+  console.log(signinErrors)
   const navigate=useNavigate();
   useEffect(()=>{
     if(isAuthenticated) navigate('/inventory');
@@ -36,7 +37,7 @@ const LoginPage = () => {
                   </p>
                 )
               }
-            <input type="password" {...register('password',{required:true})} className='w-full bg-zinc-700 text-white px-4 p-y2 rounded-md my-2' 
+            <input type="password" {...register('password',{required:true,minLength:5})} className='w-full bg-zinc-700 text-white px-4 p-y2 rounded-md my-2' 
               placeholder='password' />
                {
                 errors.password && (

@@ -25,6 +25,7 @@ const Navbar = () => {
                       )}
                       <li className="bg-indigo-500 px-4 py-1 rounded-sm">
                         <Link to='/inventory'>inventory</Link>
+                        <ul>
                         <li>
                           <Link to='/entry'>entradas</Link>
                         </li>
@@ -34,6 +35,8 @@ const Navbar = () => {
                         <li>
                           <Link to='/refound'>reintegros</Link>
                         </li>
+
+                        </ul>
                         {
                             (user.role === 'admin' || user.role === 'storer') && (
                                 <li>
