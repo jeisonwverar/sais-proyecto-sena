@@ -14,7 +14,7 @@ const InventoryHome = () => {
 
   return (
     
-    <div className="text-black">
+    <div className="text-black flex w-auto justify-center items-center">
       <div>
         <button className="m-6 p-3 bg-slate-500 text-white rounded-sm">Create</button>  
     </div>

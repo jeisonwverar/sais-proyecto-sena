@@ -3,6 +3,8 @@ import { useAuth } from "./context/AuthContext"
 
 
 function ProtectedRoute({ requiredRoles }) {
+
+
   const { loading, isAuthenticated, user } = useAuth();
   console.log('Loading:', loading);
   console.log('Is Authenticated:', isAuthenticated);
@@ -16,11 +18,8 @@ function ProtectedRoute({ requiredRoles }) {
 
   const includeRole = requiredRoles.includes(user?.role);
 
-  if (!isAuthenticated && !user && !user.role && !includeRole) {
-    
-  
-
-    return <Navigate to="/login" replace />;
+  if (!isAuthenticated || !user || !user.role || !includeRole) {
+    return <Navigate to="/" replace />;
   }
 
   

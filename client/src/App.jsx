@@ -6,7 +6,7 @@ import RegisterPage from './pages/RegisterPage'
 import InventoryHome from'./pages/InventoryHome'
 import InventoryOutputPage from './pages/InventoryOutputPage'
 import { AuthProvider } from './context/AuthContext'
-import Navbar from './components/Navbar'
+//import Navbar from './components/Navbar'
 import ProtectedRoute from './ProtectedRoute'
 import Dashboard from './pages/dashboard'
 import InventoryEntryPage from './pages/InventoryEntryPage'
@@ -15,7 +15,10 @@ import Products from './pages/Products'
 import UserPage from './pages/userPage'
 import { ProductsProvider } from './context/ProductsContext'
 import { InventoryProvider } from './context/InventoryContext'
-
+import Footer from './components/Footer'
+import NavbarMega from './components/NavbarMega'
+import PageError404 from './pages/PageError404'
+import ProfilePage from './pages/ProfilePage'
 function App() {
  
 
@@ -26,11 +29,14 @@ function App() {
         <InventoryProvider>
           <BrowserRouter>
     <main className='flex-grow'>
-     <Navbar/> 
+     {/* <Navbar/>  */}
+     <NavbarMega/>
     <Routes>
   <Route path='/' element={<HomePage />} />
   <Route path='/login' element={<LoginPage />} />
   <Route path='/register' element={<RegisterPage />} />
+  <Route path='/profile' element={<ProfilePage/>}/>
+  <Route path='*' element={<PageError404/>}/>
 
   <Route element={<ProtectedRoute requiredRoles={['client', 'admin', 'storer']} />}>
     <Route path='/output' element={<InventoryOutputPage />} />
@@ -50,7 +56,7 @@ function App() {
 </Routes>
 
     </main>
-  
+    <Footer/>
           </BrowserRouter>
         </InventoryProvider>
       </ProductsProvider>
