@@ -8,9 +8,9 @@ export const getProducts=async(_,res)=>{
       ]
     });
     
-   await res.json(products);
+   return res.json(products);
  } catch (error) {
-    res.json({message:error.message});
+  return  res.json({message:error.message});
  }
 
 };
@@ -18,9 +18,9 @@ export const getIdProduct=async(req,res)=>{
 try {
     const id=req.params.id;
     const IdProduct= await Product.findByPk(id);
-    await res.json(IdProduct);
+    return res.json(IdProduct);
 } catch (error) {
-    res.json({message:error.message});
+   return res.json({message:error.message});
 }
 };
 export const createProduct=async(req,res)=>{
@@ -39,7 +39,7 @@ export const createProduct=async(req,res)=>{
     });
 
     
-    res.json(newProduct);
+   return res.json(newProduct);
 
  } catch (error) {
     res.json({message:error.message});
@@ -60,9 +60,9 @@ export const updateProduct=async(req,res)=>{
 
         }
         await updateProduct.save();
-        res.json(updateProduct);
+       return res.json(updateProduct);
     } catch (error) {
-        res.json({message:error.message});
+      return  res.json({message:error.message});
     }
 };
 
@@ -78,7 +78,7 @@ export const deleteProduct=async(req,res)=>{
 
             res.json({message:`successfully removed ID: ${id}`}).status(204);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+      return  res.status(500).json({ message: error.message });
     }
 
 };
@@ -90,9 +90,9 @@ export const getDeletedProducts = async (_, res) => {
         where: { deletedAt: { [Op.ne]: null } }, 
         paranoid: false
       });
-     await res.json(products);
+     return res.json(products);
     } catch (error) {
-      res.status(500).json({ message: error.message });
+     return res.status(500).json({ message: error.message });
     }
   };
 
@@ -115,8 +115,8 @@ export const getDeletedProducts = async (_, res) => {
         // Restaurar el producto (eliminar la marca de eliminado lógico)
         await product.restore();
     
-        res.json({ message: `Product ${product.name} successfully restored (ID: ${id})` });
+         return res.json({ message: `Product ${product.name} successfully restored (ID: ${id})` });
       } catch (error) {
-        res.status(500).json({ message: error.message });
+         return res.status(500).json({ message: error.message });
       }
 };

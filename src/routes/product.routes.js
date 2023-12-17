@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {getProducts,createProduct,updateProduct,deleteProduct, getIdProduct,getDeletedProducts,restoreProduct}from "../controllers/product.controller.js";
 import {authRequired} from '../middlewares/validateToken.js';
-import {checkRoleAuth} from '../middlewares/validateRoll.js';
+import {checkRoleAuth} from '../middlewares/validateRole.js';
 import {productSchema} from '../schemas/product.schema.js';
 import { validateSchema } from '../middlewares/validateSchema.js'
 const router =Router();

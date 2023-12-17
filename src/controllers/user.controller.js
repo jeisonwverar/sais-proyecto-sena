@@ -13,7 +13,7 @@ export const getIdUser=async(req,res)=>{
     const id=req.params.id;
 try {
     const userId=await User.findByPk(id);
-    await res.json(userId);
+   return res.json(userId);
     
 } catch (error) {
     return res.status(404).json({message:error.message})
@@ -54,11 +54,11 @@ export const updateUsers=async(req,res)=>{
        }
         
        await updateUser.save();
-       res.json(updateUser);
+      return res.json(updateUser);
     
 
     } catch (error) {
-        res.json({message:error.message})
+      return  res.json({message:error.message})
     }
 
 };
@@ -73,11 +73,11 @@ export const deleteUsers=async(req,res)=>{
      return res.status(404).json({ message: 'User not found' });
     }
     await user.destroy({force:false})
-    res.json({message:`successfully removed ID: ${id}`}).status(204);
+   return  res.json({message:`successfully removed ID: ${id}`}).status(204);
         
 
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        return res.status(404).json({ message: error.message });
     }
 };
 
@@ -91,11 +91,11 @@ export const getUserDeleted=async(_,res)=>{
             paranoid: false, // Incluir registros eliminados lógicamente
           });
          console.log(deletedUsers)
-          res.json(deletedUsers);
+        return  res.json(deletedUsers);
       
          
     } catch (error) {
-        res.status(500).json({ message: error.message });
+      return  res.status(500).json({ message: error.message });
     }
 };
 
@@ -104,7 +104,7 @@ export const getUserDeleted=async(_,res)=>{
 export const restoreUser=async(req,res)=>{
     const id = req.params.id;
     try {
-        console.log('Restore User Route Hit');
+        //console.log('Restore User Route Hit');
        
         const user = await User.findOne(({
             where: { id },
@@ -118,8 +118,8 @@ export const restoreUser=async(req,res)=>{
    
         await user.restore();
     
-        res.json({ message: `User ${user.name} successfully restored (ID: ${id})` });
+         return res.json({ message: `User ${user.name} successfully restored (ID: ${id})` });
       } catch (error) {
-        res.status(500).json({ message: error.message });
+       return res.status(500).json({ message: error.message });
       }
 };

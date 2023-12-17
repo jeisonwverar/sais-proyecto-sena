@@ -9,7 +9,7 @@ const server=async()=>{
 
         //await sequelize.authenticate();
         //models syncronization
-        await sequelize.sync({force:false});
+        sequelize.sync({ force: false });
 
     app.listen(3000);
     console.log("Server is listening on port  http://localhost:3000/api/v1/")

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {getUsers,getIdUser,updateUsers,deleteUsers,getUserDeleted,restoreUser} from "../controllers/user.controller.js";
 import {authRequired} from '../middlewares/validateToken.js';
-import {checkRoleAuth} from '../middlewares/validateRoll.js';
+import {checkRoleAuth} from '../middlewares/validateRole.js';
 const router =Router();
 
 router.get('/users',authRequired,checkRoleAuth(['admin','storer']),getUsers);

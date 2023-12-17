@@ -1,7 +1,7 @@
 import {Router} from 'express';
 import {getInventory,getOutputInventory,getEntryInventory,getRefundInventory,createRecord,getInventoryId,updateInventory,deleteInventory} from '../controllers/inventory.controllers.js';
 import {authRequired} from '../middlewares/validateToken.js';
-import {checkRoleAuth} from '../middlewares/validateRoll.js';
+import {checkRoleAuth} from '../middlewares/validateRole.js';
 import{validateSchema} from '../middlewares/validateSchema.js';
 import {inventorySchema} from '../schemas/inventory.schema.js'
 const router=Router();

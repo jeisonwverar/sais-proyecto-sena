@@ -4,16 +4,14 @@ import { Inventory } from "../models/inventory.models.js";
 
 export const  getInventory=async(_,res)=>{
 
-    try {
+    
         try {
             const  products=await Product.findAll();
-           await res.json(products);
+          return await res.json(products);
          } catch (error) {
-            res.json({message:error.message});
+           return  res.json({message:error.message});
          }
-    } catch (error) {
-        
-    }
+    
 
 };
 
@@ -30,9 +28,9 @@ export const getOutputInventory=async(_,res)=>{
                 }
             ]
         });
-        res.json(inventory);
+      return  res.json(inventory);
     } catch (error) {
-        res.json({message:error.message});
+     return   res.json({message:error.message});
     }
 };
 export const getEntryInventory=async(_,res)=>{
@@ -48,9 +46,9 @@ export const getEntryInventory=async(_,res)=>{
                 }
             ]
         });
-        res.json(inventory);
+      return  res.json(inventory);
     } catch (error) {
-        res.json({message:error.message});
+      return  res.json({message:error.message});
     }
 };
 export const getRefundInventory=async(_,res)=>{
@@ -66,9 +64,9 @@ export const getRefundInventory=async(_,res)=>{
                 }
             ]
         });
-        res.json(inventory);
+      return  res.json(inventory);
     } catch (error) {
-        res.json({message:error.message});
+      return  res.json({message:error.message});
     }
 };
 
@@ -79,9 +77,10 @@ const getProductId= await Product.findByPk(productId);
 try {
     if(!getProductId){
 
-        res.status(404).json({message:`Product  with ID: ${productId} not found`})
+      return  res.status(404).json({message:`Product  with ID: ${productId} not found`})
         
     }
+
 
     const newRecord= await Inventory.create({
         consecutive,
@@ -92,27 +91,33 @@ try {
         date,
         productId
     })
-    
-
-    if(movementType === 'entrada'){
-        getProductId.entryAmount+=amount;
-        getProductId.endAmount+=amount;
-    }else if(movementType === 'salida'&& getProductId.endAmount <=amount){
-        getProductId.outputAmount+=amount;
-        getProductId.endAmount-=amount;
-    }else if(movementType === 'reintegro'&& getProductId.endAmount <=amount){
-        getProductId.outputAmount+=amount;
-        getProductId.endAmount-=amount;
+    let endAmount;
+    console.log("Before update: outputAmount =", getProductId.outputAmount, "endAmount =", getProductId.endAmount);
+    if (movementType === 'entrada') {
+        console.log("Condition 1:", movementType === 'entrada');
+      getProductId.entryAmount += amount;
+      endAmount = getProductId.endAmount + amount;
+    } else if (movementType === 'salida' || movementType === 'reintegro') {
+        console.log("Condition 2:", movementType === 'salida' || movementType === 'reintegro');
+        if (getProductId.endAmount >= amount) {
+            getProductId.outputAmount += amount;  // Mover aquí
+            endAmount = getProductId.endAmount - amount;
+        } else {
+            throw new Error('End amount cannot be zero or negative');
+        }
     }
-    if (getProductId.endAmount <= 0) {
-        throw new Error('End amount cannot be zero or negative');
-      }
-  
-    res.json(newRecord);
+
+    // Actualizar el endAmount después de los bloques if/else
+      getProductId.endAmount = endAmount;
+    console.log("After update: outputAmount =", getProductId.outputAmount, "endAmount =", getProductId.endAmount);
+    // Guardar el modelo Product
     await getProductId.save();
 
+    return res.json(newRecord);
+
 } catch (error) {
-    res.json({message:error.message});
+    console.error("Error:", error.message);
+   return res.json({message:error.message});
 }
 
 
@@ -127,12 +132,12 @@ export const  getInventoryId=async(req,res)=>{
 
        return res.status(404).json({message:`ID: ${id} Not Found`})
     }
-    res.json(idInventory);
+   return  res.json(idInventory);
 
 
 
  } catch (error) {
-     res.json({message:error.message});
+   return  res.json({message:error.message});
  }
 
 }
@@ -155,7 +160,8 @@ export const updateInventory=async(req,res)=>{
         }
 
         await updateInventory.save();
-        res.json(updateInventory)
+        
+       return res.json(updateInventory)
 
 
 
@@ -163,7 +169,8 @@ export const updateInventory=async(req,res)=>{
 
 
     } catch (error) {
-        res.json({message:error.message});
+        console.error("Error:", error.message);
+       return res.json({message:error.message});
     }
 
 
@@ -178,9 +185,9 @@ export const deleteInventory=async(req,res)=>{
             return res.status(404).json({message:`ID: ${id} Not Found`})
         }
         deleteId.destroy();
-        res.json(`deleted ID: ${id}`)
+      return  res.json(`deleted ID: ${id}`)
         
     } catch (error) {
-        res.json({message:error.message});
+      return  res.json({message:error.message});
     }
 }

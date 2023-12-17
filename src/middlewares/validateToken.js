@@ -10,7 +10,7 @@ if(!token)return res.status(401).json({message:'No token ,authorizacion denied'}
 jwt.verify(token,TOKEN_SECRET,(err,user)=>{
     if(err)return res.status(403).json({message:"Invalid token"});
     
-     return req.user=user;
+      req.user=user;
 });
 
 next();

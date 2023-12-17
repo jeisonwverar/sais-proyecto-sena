@@ -37,5 +37,5 @@ export const Inventory=sequelize.define('inventory',{
 
 });
 
-Inventory.belongsTo(Product);
-Product.hasMany(Inventory);
+Inventory.belongsTo(Product ,{ foreignKey: 'productId' });
+Product.hasMany(Inventory,{ foreignKey: 'productId' });

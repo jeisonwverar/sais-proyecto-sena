@@ -41,9 +41,9 @@ export const login=async(req,res)=>{
         if(!isMatch) return res.status(404).json({message:'Incorrect password'});
 
         const token= await createAccessToken({id:userFound.id,email:userFound.email,role:userFound.role});
-        res.cookie('token',token);
+      await  res.cookie('token',token);
 
-        res.json({id:userFound.id,
+       return res.json({id:userFound.id,
             name:userFound.name,
             lastname:userFound.lastname,
             role:userFound.role,
@@ -54,17 +54,17 @@ export const login=async(req,res)=>{
 
         //console.log(req.cookies)
     } catch (error) {
-        res.status(500).json({message:error.message});
+       return res.status(500).json({message:error.message});
     }
 };
-export const logout=(req,res)=>{
+export const logout=async(req,res)=>{
     try {
     
-        res.cookie('token','',{
+         await res.cookie('token','',{
             expires:new Date(0)
         })
         
-        res.sendStatus(200);
+       return  res.sendStatus(200);
     } catch (error) {
         res.status(500).json({message:error.message});
     }

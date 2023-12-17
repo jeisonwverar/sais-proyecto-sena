@@ -14,6 +14,7 @@ import InventoryRefoundPage from './pages/InventoryRefoundPage'
 import Products from './pages/Products'
 import UserPage from './pages/userPage'
 import { ProductsProvider } from './context/ProductsContext'
+import { InventoryProvider } from './context/InventoryContext'
 
 function App() {
  
@@ -22,7 +23,8 @@ function App() {
     <div className='flex flex-col min-h-screen'>
     <AuthProvider>
       <ProductsProvider>
-      <BrowserRouter>
+        <InventoryProvider>
+          <BrowserRouter>
     <main className='flex-grow'>
      <Navbar/> 
     <Routes>
@@ -49,7 +51,8 @@ function App() {
 
     </main>
   
-      </BrowserRouter>
+          </BrowserRouter>
+        </InventoryProvider>
       </ProductsProvider>
     </AuthProvider>
 
