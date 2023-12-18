@@ -12,7 +12,7 @@ import Dashboard from './pages/dashboard'
 import InventoryEntryPage from './pages/InventoryEntryPage'
 import InventoryRefoundPage from './pages/InventoryRefoundPage'
 import Products from './pages/Products'
-import UserPage from './pages/userPage'
+import UserPage from './pages/UserPage'
 import { ProductsProvider } from './context/ProductsContext'
 import { InventoryProvider } from './context/InventoryContext'
 import Footer from './components/Footer'
@@ -23,14 +23,16 @@ function App() {
  
 
   return (
-    <div className='flex flex-col min-h-screen'>
+   /*  <div className='flex flex-col min-h-screen'> */
     <AuthProvider>
       <ProductsProvider>
         <InventoryProvider>
           <BrowserRouter>
-    <main className='flex-grow'>
-     {/* <Navbar/>  */}
-     <NavbarMega/>
+          <header className='w-auto'>
+            <NavbarMega/>
+          </header>
+    <main className='  flex justify-center items-center  min-h-screen' >
+     
     <Routes>
   <Route path='/' element={<HomePage />} />
   <Route path='/login' element={<LoginPage />} />
@@ -48,7 +50,7 @@ function App() {
   <Route element={<ProtectedRoute requiredRoles={['admin', 'storer']} />}>
       <Route path='/dashboard' element={<Dashboard />} />
       <Route path='/products' element={<Products/>}/>
-      <Route path='/user' element={<UserPage/>} />
+      <Route path='/users' element={<UserPage/>} />
   </Route>
   <Route element={<ProtectedRoute requiredRoles={['admin', 'storer']} />}>
       
@@ -56,13 +58,16 @@ function App() {
 </Routes>
 
     </main>
-    <Footer/>
+    <footer>
+      <Footer/>
+
+    </footer>
           </BrowserRouter>
         </InventoryProvider>
       </ProductsProvider>
     </AuthProvider>
 
-    </div>
+/*     </div> */
   )
 }
 

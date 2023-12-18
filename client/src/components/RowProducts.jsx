@@ -5,56 +5,62 @@ const RowProducts = (props) => {
   const data = products.data || [];
 
   return (
-    <>
-      {data.length === 0 ? (
-        <tr className="border-b hover:bg-orange-100 bg-gray-100">
-          <td className="p-3 px-5">{/* Contenido del primer td */}</td>
-          <td className="p-3 px-5">{/* Contenido del segundo td */}</td>
-          <td className="p-3 px-5">{/* Contenido del tercer td */}</td>
-          <td className="p-3 px-5">{/* Contenido del cuarto td */}</td>
-          <td className="p-3 px-5">{/* Contenido del quinto td */}</td>
-          <td className="p-3 px-5 flex justify-end">
-            <button
-              type="button"
-              className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-            >
-              Save
-            </button>
-            <button
-              type="button"
-              className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-      ) : (
-       data.map((element) => (
-          <tr key={element.id} className="border-b hover:bg-orange-100 bg-gray-100">
-            <td className="p-3 px-5">{element.id}</td>
-            <td className="p-3 px-5">{element.name}</td>
-            <td className="p-3 px-5">{element.maker}</td>
-            <td className="p-3 px-5">{element.description}</td>
-            <td className="p-3 px-5">{element.subsystem}</td>
-            <td className="p-3 px-5 flex justify-end">
-              <button
-                type="button"
-                className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-              >
-                Save
-              </button>
-              <button
-                type="button"
-                className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        ))
+    <tbody>
+      {
+        (data.lenght === 0)?(
+
+            <tr className="bg-blue-700 border-b border-blue-400 hover:bg-blue-500">
+                <th scope="row" className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                    Apple MacBook Pro 17
+                </th>
+                <td className="px-6 py-4">
+                    Silver
+                </td>
+                <td className="px-6 py-4">
+                    Laptop
+                </td>
+                <td className="px-6 py-4">
+                    $2999
+                </td>
+                <td className="px-6 py-4">
+                    <a href="#" className="font-medium text-white hover:underline">Edit</a>
+                </td>
+            </tr>
+        ):(
+          data.map((ele,i)=>(
+            <tr className="bg-blue-500 border-b border-blue-200 hover:bg-blue-400" key={i}>
+                <td className="px-6 py-4">
+                    {ele.id}
+                </td>
+                <td  className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                    Microsoft Surface Pro
+                </td>
+                <td className="px-6 py-4">
+                    {ele.name}
+                </td>
+                <td className="px-6 py-4">
+                    {ele.maker}
+                </td>
+                <td className="px-6 py-4">
+                    {ele.initialAmount}
+                </td>
+                <td className="px-6 py-4">
+                    {ele.entryAmount}
+                </td>
+                <td className="px-6 py-4">
+                    {ele.outputAmount}
+                </td>
+                <td className="px-6 py-4">
+                    {}
+                </td>
+            </tr>
+            )
+        )
       )}
-    </>
-  );
+          
+            
+    </tbody>
+  )
 };
 
 export default RowProducts;

@@ -1,67 +1,106 @@
 
+
+
 import {useInventory} from '../context/InventoryContext'
 import { useEffect } from 'react'
 
 const InventoryHome = () => {
-  const {inventory,getInventory}=useInventory();
+  const {inventory:inventoryGet,getInventory}=useInventory();
  
   useEffect(()=>{
     getInventory('general')
   },[])
 
-  const data=inventory.data||[];
-  //console.log(data)
+  const inventory=inventoryGet.data||[];
+ console.log(inventory)
 
   return (
-    
-    <div className="text-black flex w-auto justify-center items-center">
-      <div>
-        <button className="m-6 p-3 bg-slate-500 text-white rounded-sm">Create</button>  
-    </div>
-    <div className="p-4 flex">
-    <div className="px-3 py-4 flex justify-center">
-        <table className="w-full text-md bg-white shadow-md rounded mb-4">
-            <tbody>
-                <tr className="border-b">
-                    <th className="text-left p-3 px-5">id</th>
-                    <th className="text-left p-3 px-5">Nombre</th>
-                    <th className="text-left p-3 px-5">Marca</th>
-                    <th className="text-left p-3 px-5">Valor Inicial</th>
-                    <th className="text-left p-3 px-5">Entrada</th>
-                    <th className="text-left p-3 px-5">Salida</th>
-                    <th className="text-left p-3 px-5">total</th>
-                    <th className="text-left p-3 px-5">subsistema</th>
-                </tr>
-                {
-                  (data.length===0)?(
-                    <tr>
-                    <td className="bg-gray-200 py-2 text-center text-xl text-black" colSpan="9">Vacio</td>
-                </tr>
-                  ):(
-                       
-                    data.map((element) => (
-              <tr key={element.id} className="border-b hover:bg-orange-100 bg-gray-100">
-                <td className="p-3 px-5">{element.id}</td>
-                <td className="p-3 px-5">{element.name}</td>
-                <td className="p-3 px-5">{element.maker}</td>
-                <td className="p-3 px-5">{element.initialAmount}</td>
-                <td className="p-3 px-5">{element.entryAmount}</td>
-                <td className="p-3 px-5">{element.outputAmount}</td>
-                <td className="p-3 px-5">{element.endAmount}</td>
-                <td className="p-3 px-5">{element.subsystem}</td>
-              </tr>
-            ))
-                  )
-                }
-               
-                
-                
-            </tbody>
-            </table>
-    </div>
 
-      </div>
-      </div>
+<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+<h1 className='text-center text-white text-xl font-bold my-5'>Inventario General</h1>
+    <table className="w-auto text-sm text-left rtl:text-right text-blue-100 dark:text-blue-100">
+        <thead className="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 dark:text-white">
+            <tr>
+                <th scope="col" className="px-6 py-3">
+                    id
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Nombre
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    marca
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    v. inicial
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    entrada
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    salida
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    v. total
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    sub
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {
+                (inventory.length===0)?(
+            <tr className="bg-blue-500 border-b border-blue-400 hover:bg-blue-400">
+                <th scope="row" colSpan={9} className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                    Lista vacia
+                </th>
+        
+            </tr>
+
+                ):(
+
+                    inventory.map((inv,i)=>(
+
+            <tr className="bg-blue-600 border-b border-blue-400 hover:bg-blue-500" key={i}>
+                
+                <td className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                    {inv.id}
+                </td>
+                <td className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                    {inv.name}
+                </td>
+                <td className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                    {inv.maker}
+                </td>
+                <td className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                    {inv.initialAmount}
+                </td>
+                <td className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                    {inv.entryAmount}
+                </td>
+                <td className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                    {inv.outputAmount}
+                </td>
+                <td className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                    {inv.endAmount}
+                </td>
+                <td className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                    {inv.subsystem}
+                </td>
+                
+            </tr>
+                    ))
+
+                )
+            }
+           
+        </tbody>
+       
+        
+    </table>
+</div>
+
   )
 }
 

@@ -14,32 +14,32 @@ const Products = () => {
  
  
   return (
-    <div className="text-black">
-      <div>
-        <button className="m-6 p-3 bg-slate-500 text-white rounded-sm">Create</button>  
-    </div>
-    <div className="p-4 flex">
-    <div className="px-3 py-4 flex justify-center">
-        <table className="w-full text-md bg-white shadow-md rounded mb-4">
-            <tbody>
-                <tr className="border-b">
-                <th className="text-left p-3 px-5">id</th>
-                    <th className="text-left p-3 px-5">Nombre</th>
-                    <th className="text-left p-3 px-5">Descripción</th>
-                    <th className="text-left p-3 px-5">Marca</th>
-                    <th className="text-left p-3 px-5">subsistema</th>
-                    <th className="text-left p-3 px-5">Action</th>
-                </tr>
-                <RowProducts products={products}/>
-               
-                
-                
-            </tbody>
-        </table>
-    </div>
-
-      </div>
-      </div>
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table className="w-full text-sm text-left rtl:text-right text-blue-100 dark:text-blue-100">
+        <thead className="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 dark:text-white">
+            <tr>
+                <th scope="col" className="px-6 py-3">
+                    Product name
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Color
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Category
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Price
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+           
+        </tbody>
+    </table>
+</div>
   )
 }
 

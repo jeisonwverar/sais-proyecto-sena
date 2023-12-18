@@ -1,45 +1,60 @@
+import { useAuth } from "../context/AuthContext";
 
-
-const RowsInventory = ({data}) => {
+const RowsInventory = (props) => {
+  const { inventory } = props;
+  const data = inventory || [];
+  const{user}=useAuth()
+    
   return (
-    <>
-      {
+    <tbody>
+    {
+      (data.lenght === 0)?(
 
-(data.length===0)?(
-        <tr>
-            <td className="bg-gray-200 py-2 text-center text-xl text-black" colSpan="9">Vacio</td>
-        </tr>
-):(
+          <tr className="bg-blue-700 border-b border-blue-400 hover:bg-blue-500">
+              <th scope="row" colSpan={9} className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                  Apple MacBook Pro 17
+              </th>
 
-data.map((element) => (
-<tr key={element.id} className="border-b hover:bg-orange-100 bg-gray-100">
-<td className="p-3 px-5">{element.date}</td>
-<td className="p-3 px-5">{element.productId}</td>
-<td className="p-3 px-5">{element.product.name}</td>
-<td className="p-3 px-5">{element.serialNumber}</td>
-<td className="p-3 px-5">{element.amount}</td>
-<td className="p-3 px-5">{element.observation}</td>
-<td className="p-3 px-5">{element.product.subsystem}</td>
-<td className="p-3 px-5">
-<button
-type="button"
-className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
->
-Save
-</button>
-<button
-type="button"
-className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
->
-Delete
-</button>
-</td>
-</tr>
-)
-  
-))
-}
-    </>
+          </tr>
+      ):(
+        data.map((ele,i)=>(
+          <tr className="bg-blue-500 border-b border-blue-200 hover:bg-blue-400" key={i}>
+              <td scope="row" className="px-6 py-4 font-medium" >
+                  {ele.date}
+              </td>
+              <td className="px-6 py-4 font-medium " >
+                  {ele.id}
+              </td>
+              <td className="px-6 py-4 font-medium ">
+                  {ele.product.name??=''}
+              </td>
+              <td className="px-6 py-4 font-medium ">
+                  {ele.amount}
+              </td>
+              <td className="px-6 py-4 font-medium ">
+                  {ele.serialNumber}
+              </td>
+              <td className="px-6 py-4 font-medium ">
+                  {ele.observation}
+              </td>
+              <td className="px-6 py-4 font-medium ">
+                  {ele.product.subsystem??=''}
+              </td>
+              {
+              (user.role==='storer'||user.role==='admin')&&(
+              <td className="flex flex-col gap-2 px-6 py-4 ">
+                    <a href="#" className="font-medium text-white hover:underline">Edit</a>
+                    <a href="#" className="font-medium text-white hover:underline">Delete</a>
+                </td>
+              )
+                }
+          </tr>
+          )
+      )
+    )}
+        
+          
+  </tbody>
   )
 }
 

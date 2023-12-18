@@ -1,6 +1,6 @@
 
 
-const userPage = () => {
+const UserPage = () => {
   return (
    
       <div className="text-black">
@@ -40,4 +40,4 @@ const userPage = () => {
   
 }
 
-export default userPage
+export default UserPage
