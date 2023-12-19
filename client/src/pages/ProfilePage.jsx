@@ -1,55 +1,54 @@
+import { Link } from "react-router-dom";
 
-import { useEffect } from "react"
-import { useAuth } from "../context/AuthContext"
-
+import { useAuth } from "../context/AuthContext";
+import profileImg from "../assets/patron-1.jpg";
 
 const profile = () => {
-  const{user,loading}=useAuth()
+  const { user, loading } = useAuth();
 
-
-
-
-
- 
   return (
-   
+    <main className="flex flex-col justify-center items-center gap-4">
+      <h1 className="text-2xl font-bold  text-white ">Perfil.</h1>
+      <div className="  w-60 text-lg text-gray-500  bg-white border border-gray-200 rounded-lg shadow-sm  dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
+        <img src={profileImg} alt="patron" className="block w-full  h-40 rounded-t-lg" />
+        <div className="p-3">
+          <div className="flex items-center justify-between mb-2">
+            <img
+              className="w-20 h-20 rounded-full border-slate-500 "
+              src={`https://robohash.org/${loading ? "avatar" : user.role}`}
+              alt={`${loading ? "avatar" : user.name}`}
+            />
 
-
-<div   className="  w-64 text-sm text-gray-500  bg-white border border-gray-200 rounded-lg shadow-sm  dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
-    <div className="p-3">
-        <div className="flex items-center justify-between mb-2">
-            <a href="#">
-                <img className="w-10 h-10 rounded-full" src={`https://robohash.org/avatar`} alt="Jese Leos"/>
-            </a>
             <div>
-                <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Follow</button>
+              <button
+                type="button"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                <Link to="/">Home</Link>
+              </button>
             </div>
-        </div>
-        <p className="text-base font-semibold leading-none text-gray-900 dark:text-white">
-            <a href="#"></a>
-        </p>
-        <p className="mb-3 text-sm font-normal">
-            <a href="#" className="hover:underline">@jeseleos</a>
-        </p>
-        <p className="mb-4 text-sm">Open-source contributor. Building <a href="#" className="text-blue-600 dark:text-blue-500 hover:underline">flowbite.com</a>.</p>
-        <ul className="flex text-sm">
+          </div>
+          <p className="text-base font-semibold leading-none text-gray-900 dark:text-white">
+            {`${loading ? "Name" : user.role}`}
+          </p>
+          <p className="mb-6 text-sm">
+            Correo: 
+            <a
+              href="#"
+              className="text-blue-600 dark:text-blue-500 hover:underline"
+            >{`${loading ? "@" : user.email}`}</a>
+            .
+          </p>
+          <ul className="flex text-sm">
             <li className="me-2">
-                <a href="#" className="hover:underline">
-                    <span className="font-semibold text-gray-900 dark:text-white">799</span>
-                    <span>Following</span>
-                </a>
+              Nombre: {`${loading ? "Name" : user.name}`}
             </li>
-            <li>
-                <a href="#" className="hover:underline">
-                    <span className="font-semibold text-gray-900 dark:text-white">3,758</span>
-                    <span>Followers</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
+            <li>Apellido: {`${loading ? "lastName" : user.lastname}`}</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+  );
+};
 
-  )
-}
-
-export default profile
+export default profile;

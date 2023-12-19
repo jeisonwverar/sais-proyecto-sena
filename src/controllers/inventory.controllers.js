@@ -7,7 +7,7 @@ export const  getInventory=async(_,res)=>{
     
         try {
             const  products=await Product.findAll();
-          return await res.json(products);
+           await res.json(products);
          } catch (error) {
            return  res.json({message:error.message});
          }

@@ -15,29 +15,34 @@ const Products = () => {
  
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <h1 className='text-center text-white text-xl font-bold my-5'>Inventario Entrada</h1>
     <table className="w-full text-sm text-left rtl:text-right text-blue-100 dark:text-blue-100">
         <thead className="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 dark:text-white">
             <tr>
-                <th scope="col" className="px-6 py-3">
-                    Product name
+            <th scope="col" className="px-6 py-3">
+                    nombre
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    Color
+                    nombre
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    Category
+                    descripción
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    Price
+                    marca
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    subsistema
                 </th>
                 <th scope="col" className="px-6 py-3">
                     Action
                 </th>
             </tr>
         </thead>
-        <tbody>
+        
+        <RowProducts products={products}/>
            
-        </tbody>
+        
     </table>
 </div>
   )

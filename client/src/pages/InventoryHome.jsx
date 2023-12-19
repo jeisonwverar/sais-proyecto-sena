@@ -51,7 +51,7 @@ const InventoryHome = () => {
 
             {
                 (inventory.length===0)?(
-            <tr className="bg-blue-500 border-b border-blue-400 hover:bg-blue-400">
+            <tr className="bg-blue-400 border-b border-blue-400 hover:bg-blue-600">
                 <th scope="row" colSpan={9} className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
                     Lista vacia
                 </th>
@@ -62,7 +62,7 @@ const InventoryHome = () => {
 
                     inventory.map((inv,i)=>(
 
-            <tr className="bg-blue-600 border-b border-blue-400 hover:bg-blue-500" key={i}>
+            <tr className="bg-blue-500 border-b border-blue-400 hover:bg-blue-400" key={i}>
                 
                 <td className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
                     {inv.id}

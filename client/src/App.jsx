@@ -19,6 +19,7 @@ import Footer from './components/Footer'
 import NavbarMega from './components/NavbarMega'
 import PageError404 from './pages/PageError404'
 import ProfilePage from './pages/ProfilePage'
+import UserPageDelete from './pages/UserPageDelete'
 function App() {
  
 
@@ -52,7 +53,8 @@ function App() {
       <Route path='/products' element={<Products/>}/>
       <Route path='/users' element={<UserPage/>} />
   </Route>
-  <Route element={<ProtectedRoute requiredRoles={['admin', 'storer']} />}>
+  <Route element={<ProtectedRoute requiredRoles={['admin']} />}>
+    <Route path='/users/delete' element={<UserPageDelete/>}/>
       
   </Route>
 </Routes>

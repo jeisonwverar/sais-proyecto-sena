@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
-import {getUsersRequest} from '../api/user.js'
+import {getDeleteUsersRequest} from '../api/user.js'
 import Tabs from '../components/Tabs.jsx';
 import TableUsers from '../components/TableUsers.jsx';
 
-const UserPage = () => {
-   const [user,setUser]= useState([]);
+
+
+const UserPageDelete = () => {
+    const [user,setUser]= useState([]);
 
     
      const getListUser=async()=>{
         try {
-          const res= await getUsersRequest()
+          const res= await getDeleteUsersRequest()
             console.log(res.data)
             setUser(res.data)
         } catch (error) {
@@ -25,20 +27,13 @@ const UserPage = () => {
  
 
    console.log(user)
-
-
-
   return (
-   
-      <div>
+    <div>
         <Tabs/>
         <TableUsers/>
-      </div>
-
-
-
-    )
-  
+        
+    </div>
+  )
 }
 
-export default UserPage
+export default UserPageDelete;

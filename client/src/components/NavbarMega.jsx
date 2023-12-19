@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useRef } from "react";
 import { Link } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
@@ -7,12 +7,15 @@ const NavbarMega = () => {
   const { isAuthenticated, logout, user } = useAuth();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isDrawMenu, setIsDrawMenu] = useState(false);
+  const menuRef = useRef(null);
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
 
   const toggleDrow = () => {
     setIsDrawMenu(!isDrawMenu);
+    
+    
   };
 
   return (
@@ -136,7 +139,7 @@ const NavbarMega = () => {
                       isDrawMenu ? "block" : "hidden"
                     } w-auto grid-cols-2 text-sm bg-white border border-gray-100 rounded-lg shadow-md dark:border-gray-700 md:grid-cols-3 dark:bg-gray-700`}
                   >
-                    <div className="p-4 pb-0 text-gray-900 md:pb-4 dark:text-white">
+                    <div id='mega-menu-div' ref={menuRef} className="p-4 pb-0 text-gray-900 md:pb-4 dark:text-white">
                       <ul
                         className="space-y-4"
                         aria-labelledby="mega-menu-icons-dropdown-button"
@@ -218,7 +221,7 @@ const NavbarMega = () => {
                         </li>
                       </ul>
                     </div>
-                    <div className="p-4 pb-0 text-gray-900 md:pb-4 dark:text-white">
+                    <div id='mega-menu-div' ref={menuRef} className="p-4 pb-0 text-gray-900 md:pb-4 dark:text-white">
                       <ul className="space-y-4">
                         <li>
                           <Link
@@ -298,7 +301,7 @@ const NavbarMega = () => {
                        
                       </ul>
                     </div>
-                    <div className="p-4 text-gray-900 dark:text-white">
+                    <div id='mega-menu-div' ref={menuRef} className="p-4 text-gray-900 dark:text-white">
                       <ul className="space-y-4">
                         <li>
                           <a
