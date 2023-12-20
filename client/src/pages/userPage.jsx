@@ -30,9 +30,9 @@ const UserPage = () => {
 
   return (
    
-      <div>
+      <div className='w-full m-28 flex flex-col gap-2'>
         <Tabs/>
-        <TableUsers/>
+        <TableUsers user={user}/>
       </div>
 
 

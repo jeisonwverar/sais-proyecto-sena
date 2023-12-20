@@ -7,15 +7,15 @@ const profile = () => {
   const { user, loading } = useAuth();
 
   return (
-    <main className="flex flex-col justify-center items-center gap-4">
+    <main className=" min-w-full flex flex-col justify-center items-center gap-4">
       <h1 className="text-2xl font-bold  text-white ">Perfil.</h1>
-      <div className="  w-60 text-lg text-gray-500  bg-white border border-gray-200 rounded-lg shadow-sm  dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
+      <div className="w-7/12 text-lg text-gray-500  bg-white border border-gray-200 rounded-lg shadow-sm  dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
         <img src={profileImg} alt="patron" className="block w-full  h-40 rounded-t-lg" />
         <div className="p-3">
           <div className="flex items-center justify-between mb-2">
             <img
               className="w-20 h-20 rounded-full border-slate-500 "
-              src={`https://robohash.org/${loading ? "avatar" : user.role}`}
+              src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${loading ? "avatar" : user.name}`}
               alt={`${loading ? "avatar" : user.name}`}
             />
 

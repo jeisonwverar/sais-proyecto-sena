@@ -12,7 +12,7 @@ const RowProducts = (props) => {
 
             <tr className="bg-blue-700 border-b border-blue-400 hover:bg-blue-500">
                 <th scope="row" colSpan={6} className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
-                    Apple MacBook Pro 17
+                    vacio
                 </th> 
             </tr>
         ):(
@@ -22,16 +22,16 @@ const RowProducts = (props) => {
                     {ele.id}
                 </td>
                 <td  className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
-                    Microsoft Surface Pro
+                    {ele.name}
                 </td>
                 <td className="px-6 py-4">
-                    {ele.name}
+                    {ele.description}
                 </td>
                 <td className="px-6 py-4">
                     {ele.maker}
                 </td>
                 <td className="px-6 py-4">
-                    {ele.description}
+                    {ele.subsystem}
                 </td>
                
                 {
