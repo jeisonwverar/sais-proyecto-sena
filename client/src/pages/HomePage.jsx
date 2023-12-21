@@ -4,7 +4,7 @@ const HomePage = () => {
   return (
     <div className=" flex flex-col items-center justify-center ">
       <div className="flex  flex-col max-w-xl py-5 m-3">
-          <h1 className=" text-3xl font-bold py-5 text-cyan-800">!Bienvenidos</h1>
+          <h1 className=" text-3xl font-bold py-5 text-white ">!Bienvenidos</h1>
           <p className="text-white 2xl">Nuestra aplicación web consiste en un inventario muy intuitivo para nuestros usuarios,
                                           Creado para la necesidad de tener un manejo más adecuado.
           </p>

@@ -18,7 +18,7 @@ const LoginPage = () => {
   return (
     <div className='flex h-[calc(100vh-100px)] items-center justify-center '>
 
-        <div className='bg-zinc-800 max-w-md w-full p-10 rounded-md'>
+        <div className='bg-zinc-600 max-w-md w-full p-10 rounded-md'>
         {
         signinErrors.map((error,i)=>(
           <div className='bg-red-500 p-2 text-white text-center' key={i}> 
@@ -50,7 +50,7 @@ const LoginPage = () => {
                    entry
               </button>
           </form>
-          <p>Don´t have an account
+          <p  className='text-white'>Don´t have an account
             <Link to='/register' className='flex gap-x-2 text-blue-400'>Sign up </Link>
           </p>
         </div>

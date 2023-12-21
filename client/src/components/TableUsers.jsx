@@ -1,10 +1,60 @@
 import deleteImg from '../assets/delete-icon.svg'
-
+import restoreImg from '../assets/restore.svg'
+import { Link,useNavigate } from 'react-router-dom';
+import {deleteUsersRequest,updateRestoreRequest} from '../api/user'
+import { useEffect,useState } from 'react';
+import { useLocation } from 'react-router-dom';
 const TableUsers = (props) => {
+  const navigate=useNavigate();  
    const {user}= props;
-   const data = user|| [];
+   const [data, setData] = useState([])
+   const location = useLocation();
+   //const [deleteUsers,setDeleteUsers]= useState([])
+ useEffect(()=>{
+    setData(user)
+ },[user])
+   
+  const deleteUser=(async(id)=>{
+    try {
+      const res = await deleteUsersRequest(id);
+       if(res.status===204){
+        setData(data.filter(d=>d.id!==id))
+       
+       }
+   
+        
+    } catch (error) {
+        console.log(error)
+    }
+  })
+  const restoreUser=(async(id)=>{
+        try {
+           const res=await  updateRestoreRequest(id)
+           return res
+        } catch (error) {
+            console.log(error)
+        }
+  })
 
-   console.log('data desde componentente',data)
+       const handleClick=(d)=>{
+        try {
+            if(!d.deleteAt){ 
+             deleteUser(d.id)
+             navigate('/users/delete')
+
+            
+         }
+        
+             restoreUser(d.id)
+             navigate('/users')
+
+            
+        } catch (error) {
+           console.log(error) 
+        }
+       }
+
+   console.log('data desde componentente',data.deleteAt)
   return (
     
 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -23,8 +73,8 @@ const TableUsers = (props) => {
                    editar
                 </th>
                 <th scope="col" className="p-4">
-                    delete
-                </th>
+                   { location.pathname.includes('/users/delete')?'restaurar':'eliminar'}
+                                </th>
             </tr>
         </thead>
         <tbody>
@@ -49,11 +99,17 @@ const TableUsers = (props) => {
                 </td>
             
                 <td className="px-6 py-4">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
+                    <Link to={`/users/${d.id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                        Edit user</Link>
                 </td>
-                <td className="w-4 p-4 hover:bg-red-400">
-                    <div className="flex items-center justify-center">
-                        <img src={deleteImg} alt="delete"  className='w-6 h-6 cursor-pointer  '/>
+                <td className={`w-4 p-4 ${location.pathname.includes('/users/delete')? 'hover:bg-green-400':'hover:bg-red-400'} cursor-pointer ease-out`}
+                onClick={()=>handleClick(d)}
+                >
+                    <div
+                    
+                    className="flex items-center justify-center">
+                        <img src={
+                              location.pathname.includes('/users/delete')?restoreImg:deleteImg} alt="delete"  className='w-6 h-6   '/>
                     </div>
                 </td>
                 

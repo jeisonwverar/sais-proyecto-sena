@@ -22,7 +22,7 @@ const RegisterPage = () => {
 
   return (
     <div className='flex h-[calc(100vh-100px)] items-center justify-center '>
-      <div className='bg-zinc-800 max-w-md p-10 rounded-md'>
+      <div className='bg-zinc-600 max-w-md p-10 rounded-md'>
       {
         registerError.map((error,i)=>(
           <div key={i} className='bg-red-500 p-2 text-white text-center'>
@@ -30,7 +30,7 @@ const RegisterPage = () => {
           </div>
         ))
       }
-      <h1>Register</h1>
+      <h1 className='text-3xl font-bold my-2 text-white'>Register</h1>
       <form onSubmit={onSubmit}>
       <input type="text" 
        {...register('name',{required:true})} 
@@ -39,7 +39,7 @@ const RegisterPage = () => {
 
         {
           errors.name && (
-            <p className='text-red-500'>
+            <p className='text-red-500 w-full'>
               name is required
             </p>
           )
@@ -51,7 +51,7 @@ const RegisterPage = () => {
 
         {
           errors.lastname && (
-            <p className='text-red-500'>
+            <p className='text-red-500 w-full'>
               lastname is required
             </p>
           )
@@ -63,7 +63,7 @@ const RegisterPage = () => {
 
         {
           errors.email && (
-            <p className='text-red-500'>
+            <p className='text-red-500 w-full'>
               email is required
             </p>
           )
@@ -89,7 +89,7 @@ const RegisterPage = () => {
        </button>
 
       </form>
-      <p>Already have account? 
+      <p className='text-white'>Already have account? 
       <Link to='/login' className='flex gap-x-2 text-blue-400'>Sign up
     </Link></p>
 

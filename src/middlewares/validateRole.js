@@ -14,6 +14,6 @@ export const checkRoleAuth = (roles) => async (req, res, next) => {
       
     } catch (error) {
       console.error('Error in checkRoleAuth middleware:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   };

@@ -13,6 +13,12 @@ export const getIdUser=async(req,res)=>{
     const id=req.params.id;
 try {
     const userId=await User.findByPk(id);
+
+    if (!userId) {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+    // Aquí desencriptamos temporalmente la contraseña antes de enviarla al frontend
+     
    return res.json(userId);
     
 } catch (error) {

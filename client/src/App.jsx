@@ -20,6 +20,7 @@ import NavbarMega from './components/NavbarMega'
 import PageError404 from './pages/PageError404'
 import ProfilePage from './pages/ProfilePage'
 import UserPageDelete from './pages/UserPageDelete'
+import UserPageEdit from './pages/UserPageEdit'
 function App() {
  
 
@@ -52,6 +53,7 @@ function App() {
       <Route path='/dashboard' element={<Dashboard />} />
       <Route path='/products' element={<Products/>}/>
       <Route path='/users' element={<UserPage/>} />
+      <Route path='/users/:id' element={<UserPageEdit/>}/>
   </Route>
   <Route element={<ProtectedRoute requiredRoles={['admin']} />}>
     <Route path='/users/delete' element={<UserPageDelete/>}/>
