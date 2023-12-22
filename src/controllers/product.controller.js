@@ -10,7 +10,7 @@ export const getProducts=async(_,res)=>{
     
    return res.json(products);
  } catch (error) {
-  return  res.json({message:error.message});
+  return  res.json({message:error.message}).status(404);
  }
 
 };

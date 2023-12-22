@@ -21,6 +21,7 @@ import PageError404 from './pages/PageError404'
 import ProfilePage from './pages/ProfilePage'
 import UserPageDelete from './pages/UserPageDelete'
 import UserPageEdit from './pages/UserPageEdit'
+import ProductsFormPage from './pages/ProductsFormPage'
 function App() {
  
 
@@ -52,6 +53,8 @@ function App() {
   <Route element={<ProtectedRoute requiredRoles={['admin', 'storer']} />}>
       <Route path='/dashboard' element={<Dashboard />} />
       <Route path='/products' element={<Products/>}/>
+      <Route path='/products/add' element={<ProductsFormPage/>}/>
+      <Route path='/products/:id' element={<ProductsFormPage/>}/>
       <Route path='/users' element={<UserPage/>} />
       <Route path='/users/:id' element={<UserPageEdit/>}/>
   </Route>

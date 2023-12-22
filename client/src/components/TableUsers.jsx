@@ -5,11 +5,11 @@ import {deleteUsersRequest,updateRestoreRequest} from '../api/user'
 import { useEffect,useState } from 'react';
 import { useLocation } from 'react-router-dom';
 const TableUsers = (props) => {
-  const navigate=useNavigate();  
+  
    const {user}= props;
    const [data, setData] = useState([])
    const location = useLocation();
-   //const [deleteUsers,setDeleteUsers]= useState([])
+   
  useEffect(()=>{
     setData(user)
  },[user])
@@ -17,8 +17,9 @@ const TableUsers = (props) => {
   const deleteUser=(async(id)=>{
     try {
       const res = await deleteUsersRequest(id);
-       if(res.status===204){
-        setData(data.filter(d=>d.id!==id))
+      
+       if(res.status==204){
+        return setData(data.filter(d=>d.id!==id))
        
        }
    
@@ -30,7 +31,9 @@ const TableUsers = (props) => {
   const restoreUser=(async(id)=>{
         try {
            const res=await  updateRestoreRequest(id)
-           return res
+           if(res.status==200){
+            return setData(data.filter(d=>d.id!==id))
+           }
         } catch (error) {
             console.log(error)
         }
@@ -38,15 +41,14 @@ const TableUsers = (props) => {
 
        const handleClick=(d)=>{
         try {
-            if(!d.deleteAt){ 
-             deleteUser(d.id)
-             navigate('/users/delete')
+            if (!d.deleteAt) {
+               deleteUser(d.id);
+            }
 
+             restoreUser(d.id);
             
-         }
-        
-             restoreUser(d.id)
-             navigate('/users')
+         
+    
 
             
         } catch (error) {
@@ -54,7 +56,7 @@ const TableUsers = (props) => {
         }
        }
 
-   console.log('data desde componentente',data.deleteAt)
+   
   return (
     
 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -102,8 +104,8 @@ const TableUsers = (props) => {
                     <Link to={`/users/${d.id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                         Edit user</Link>
                 </td>
-                <td className={`w-4 p-4 ${location.pathname.includes('/users/delete')? 'hover:bg-green-400':'hover:bg-red-400'} cursor-pointer ease-out`}
-                onClick={()=>handleClick(d)}
+                <td onClick={()=>handleClick(d)}  className={`w-4 p-4 ${location.pathname.includes('/users/delete')? 'hover:bg-green-400':'hover:bg-red-400'} cursor-pointer ease-out`}
+                
                 >
                     <div
                     

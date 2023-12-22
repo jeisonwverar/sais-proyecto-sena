@@ -25,6 +25,45 @@ export const UseProducts=()=>{
             console.error(error)
         }
     }
+
+    const getProduct=async(id)=>{
+        try {
+            const res=await getProductRequest(id)
+            return res.data;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const createProduct=async(newProduct)=>{
+        try {
+            const res= await createProductsRequest(newProduct)
+            console.log(res);
+        } catch (error) {
+            console.error(error)
+        }
+    };
+
+    const updateProduct=async(id,newProduct)=>{
+        try {
+            await updateProductsRequest(id,newProduct)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    const deleteProduct=async(id)=>{
+        try {
+            const res= await deleteProductsRequest(id);
+            if(res.status==204)setProducts(products.filter(pro=>pro.id!==id))
+        } catch (error) {
+            console.error(error)
+        }
+
+    }
+
+
     
     
 
@@ -34,6 +73,10 @@ export const UseProducts=()=>{
   return (
     <ProductsContext.Provider value={{
        getProducts,
+       createProduct,
+       updateProduct,
+       getProduct,
+       deleteProduct,
        products
 
     }}>

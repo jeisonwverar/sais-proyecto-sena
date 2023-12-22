@@ -96,7 +96,7 @@ export const getUserDeleted=async(_,res)=>{
             where: { deletedAt: { [Op.ne]: null } }, // Usuarios con deletedAt no nulo
             paranoid: false, // Incluir registros eliminados lógicamente
           });
-         console.log(deletedUsers)
+         //console.log(deletedUsers)
         return  res.json(deletedUsers);
       
          

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const RowProducts = (props) => {
@@ -37,7 +38,7 @@ const RowProducts = (props) => {
                 {
               (user.role==='storer'||user.role==='admin')&&(
               <td className="flex flex-col gap-2 px-6 py-4 ">
-                    <a href="#" className="font-medium text-white hover:underline">Edit</a>
+                    <Link to={`/products/${ele.id}`} className="font-medium text-white hover:underline">Edit</Link>
                     <a href="#" className="font-medium text-white hover:underline">Delete</a>
                 </td>
               )

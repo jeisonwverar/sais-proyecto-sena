@@ -5,18 +5,23 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const FormUserEdit = () => {
   const [error, seterror] = useState([]);
+ 
   const { register, handleSubmit, setValue, formState: {errors} } = useForm();
   const navigate=useNavigate();
   const params = useParams();
   useEffect(() => {
     const loadUser = async () => {
       try {
-        const user = await getUserRequest(params.id);
-        //console.log(user.data);
-        await setValue("name", user.data.name);
-        await setValue("lastname", user.data.lastname);
-        await setValue("email", user.data.email);
-        await setValue("role", user.data.role);
+        if(params.id){
+          const user = await getUserRequest(params.id);
+          //console.log(user.data);
+          await setValue("name", user.data.name);
+          await setValue("lastname", user.data.lastname);
+          await setValue("email", user.data.email);
+          await setValue("role", user.data.role);
+
+        }
+        
       } catch (error) {
         console.log(error);
         seterror(error.response.data);
@@ -97,7 +102,6 @@ const FormUserEdit = () => {
             htmlFor="password"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            {" "}
             Nueva constraseña
           </label>
           <input
