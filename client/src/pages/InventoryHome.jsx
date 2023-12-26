@@ -3,7 +3,7 @@
 
 import {useInventory} from '../context/InventoryContext'
 import { useEffect } from 'react'
-
+import Button from '../components/Button';
 const InventoryHome = () => {
   const {inventory:inventoryGet,getInventory}=useInventory();
  
@@ -17,6 +17,7 @@ const InventoryHome = () => {
   return (
 
 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+<Button path='/inventory/add'></Button>
 <h1 className='text-center text-white text-xl font-bold my-5'>Inventario General</h1>
     <table className="w-auto text-sm text-left rtl:text-right text-blue-100 dark:text-blue-100">
         <thead className="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 dark:text-white">

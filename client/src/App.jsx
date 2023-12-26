@@ -22,6 +22,7 @@ import ProfilePage from './pages/ProfilePage'
 import UserPageDelete from './pages/UserPageDelete'
 import UserPageEdit from './pages/UserPageEdit'
 import ProductsFormPage from './pages/ProductsFormPage'
+import InventoryFormPage from './pages/InventoryFormPage'
 function App() {
  
 
@@ -57,6 +58,8 @@ function App() {
       <Route path='/products/:id' element={<ProductsFormPage/>}/>
       <Route path='/users' element={<UserPage/>} />
       <Route path='/users/:id' element={<UserPageEdit/>}/>
+      <Route path='/inventory/add'element={<InventoryFormPage/>}></Route>
+      <Route path='/inventory/:id'element={<InventoryFormPage/>}></Route>
   </Route>
   <Route element={<ProtectedRoute requiredRoles={['admin']} />}>
     <Route path='/users/delete' element={<UserPageDelete/>}/>

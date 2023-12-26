@@ -6,21 +6,23 @@ const ProductsFormPage = () => {
     const{register,handleSubmit,setValue}=useForm();
     const {getProduct,updateProduct,createProduct}=UseProducts();
     const navigate=useNavigate();
-    const params=useParams;
+    const params=useParams();
     useEffect(()=>{
       const loadProduct=async()=>{
+        const product=await getProduct(params.id)
         if(params.id){
-            const product=await getProduct(params.id)
-            await setValue('name',product.name)
-            await setValue('description',product.description)
-            await setValue('maker',product.maker)
-            await setValue('initialAmount',product.initialAmount)
-            await setValue('subsystem',product.subsystem)
-            console.log(product)
+          await setValue('name',product.name)
+          await setValue('description',product.description)
+          await setValue('maker',product.maker)
+          await setValue('initialAmount',product.initialAmount)
+          await setValue('subsystem',product.subsystem)
+             
         }
 
+        
       }
       loadProduct()
+      
     })
     const onSubmit=handleSubmit((data)=>{
         const parseData={

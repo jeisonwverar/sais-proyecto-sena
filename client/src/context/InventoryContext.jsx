@@ -4,6 +4,9 @@ import {
   getInventoryOutputRequest,
   getInventoryRequest,
   getInventoryRefoundRequest,
+  createInventoryRequest,
+  deleteInventoryRequest,
+  updateInventoryRequest
 } from "../api/inventory.js";
 const InventoryContext = createContext();
 
@@ -48,6 +51,32 @@ export const InventoryProvider = ({ children }) => {
     }
   };
 
+   const createInventory=async(inventory)=>{
+    try {
+     const res=await createInventoryRequest(inventory)
+      console.log(res);
+    } catch (error) {
+      console.log(error)
+    }
+   }
+   const updateInventory=async(id,inventory)=>{
+    try {
+     const res= await updateInventoryRequest(id,inventory);
+        console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
+   }
+
+   const deleteInventory=async(id)=>{
+    try {
+      const res = await deleteInventoryRequest(id)
+      if(res==204) return setInventory(inventory.filter(inv=>inv.id!==id))
+    } catch (error) {
+      console.log(error)
+    }
+   }
+
   return (
     <InventoryContext.Provider
       value={{
@@ -56,6 +85,9 @@ export const InventoryProvider = ({ children }) => {
         inventory,
         output,
         refound,
+        createInventory,
+        updateInventory,
+        deleteInventory
       }}
     >
       {children}
