@@ -6,7 +6,8 @@ import {
   getInventoryRefoundRequest,
   createInventoryRequest,
   deleteInventoryRequest,
-  updateInventoryRequest
+  updateInventoryRequest,
+  getInventoryIdRequest
 } from "../api/inventory.js";
 const InventoryContext = createContext();
 
@@ -24,8 +25,17 @@ export const InventoryProvider = ({ children }) => {
   const [entry, setEntry] = useState([]);
   const [output, setOutput] = useState([]);
   const [refound, setRefound] = useState([]);
+  const [inventoryError, setInventoryError] = useState([]);
 
   //Inventory
+  const getInventoryId=async(id)=>{
+    try {
+    const res =await  getInventoryIdRequest(id);
+    return res.data
+    } catch (error) {
+      setInventoryError(error.response.data)
+    }
+  }
 
   const getInventory = async (type) => {
     try {
@@ -47,35 +57,40 @@ export const InventoryProvider = ({ children }) => {
         setRefound(res);
       }
     } catch (error) {
-      console.error(error);
+      setInventoryError([error.response.data.message]);
     }
   };
 
-   const createInventory=async(inventory)=>{
+  const createInventory = async (inventory) => {
     try {
-     const res=await createInventoryRequest(inventory)
+      const res = await createInventoryRequest(inventory);
       console.log(res);
     } catch (error) {
-      console.log(error)
+      setInventoryError([error.response.data.message]);
     }
-   }
-   const updateInventory=async(id,inventory)=>{
+  };
+  const updateInventory = async (id, inventory) => {
     try {
-     const res= await updateInventoryRequest(id,inventory);
-        console.log(res)
+      const res = await updateInventoryRequest(id, inventory);
+      console.log(res);
     } catch (error) {
-      console.log(error)
-    }
-   }
+      if (Array.isArray(error.response.data)) {
+        setInventoryError(error.response.data);
+      }
 
-   const deleteInventory=async(id)=>{
-    try {
-      const res = await deleteInventoryRequest(id)
-      if(res==204) return setInventory(inventory.filter(inv=>inv.id!==id))
-    } catch (error) {
-      console.log(error)
+      setInventoryError([error.response.data.message]);
     }
-   }
+  };
+
+  const deleteInventory = async (id) => {
+    try {
+      const res = await deleteInventoryRequest(id);
+      if (res == 204)
+        return setInventory(inventory.filter((inv) => inv.id !== id));
+    } catch (error) {
+      setInventoryError([error.response.data.message]);
+    }
+  };
 
   return (
     <InventoryContext.Provider
@@ -87,7 +102,9 @@ export const InventoryProvider = ({ children }) => {
         refound,
         createInventory,
         updateInventory,
-        deleteInventory
+        deleteInventory,
+        inventoryError,
+        getInventoryId
       }}
     >
       {children}

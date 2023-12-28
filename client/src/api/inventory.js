@@ -1,6 +1,7 @@
 import axios from './axios.js';
 
 export const getInventoryRequest =()=>axios.get('inventory');
+export const getInventoryIdRequest=(id)=>axios.get(`/inventory/${id}`);
 export const getInventoryOutputRequest=()=>axios.get('/inventory/output');
 export const getInventoryEntryRequest=()=>axios.get('/inventory/entry');
 export const getInventoryRefoundRequest=()=>axios.get('/inventory/refund');

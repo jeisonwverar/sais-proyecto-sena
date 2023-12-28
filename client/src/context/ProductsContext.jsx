@@ -46,7 +46,8 @@ export const UseProducts=()=>{
 
     const updateProduct=async(id,newProduct)=>{
         try {
-            await updateProductsRequest(id,newProduct)
+            const data=await updateProductsRequest(id,newProduct)
+            console.log(data,'exito')
         } catch (error) {
             console.log(error)
         }

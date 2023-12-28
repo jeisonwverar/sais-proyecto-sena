@@ -66,7 +66,7 @@ export const logout=async(req,res)=>{
         
        return  res.sendStatus(200);
     } catch (error) {
-        res.status(500).json({message:error.message});
+     return   res.status(500).json({message:error.message});
     }
 };
 export const verifyToken=async(req,res)=>{
